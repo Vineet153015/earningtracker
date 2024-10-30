@@ -18,7 +18,8 @@ class EarningsProvider with ChangeNotifier {
     try {
       log('Fetching earnings data for ticker: $ticker');
       final earningsList = await EarningsApi().getEarnings(ticker);
-      earningsData = earningsList.map((json) => EarningsModel.fromJson(json)).toList();
+      earningsData =
+          earningsList.map((json) => EarningsModel.fromJson(json)).toList();
       log('Fetched and parsed earnings data: $earningsData');
     } catch (e) {
       error = 'Failed to load earnings data';
@@ -29,4 +30,3 @@ class EarningsProvider with ChangeNotifier {
     }
   }
 }
-

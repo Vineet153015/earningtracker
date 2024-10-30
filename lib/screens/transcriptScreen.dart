@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../api/transcriptapi.dart';
 
-
 class TranscriptScreen extends StatelessWidget {
   final String ticker;
   final String date;
@@ -11,10 +10,9 @@ class TranscriptScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Parse year and quarter from `date`
     final year = date.split('-')[0];
     final month = int.parse(date.split('-')[1]);
-    final quarter = ((month - 1) ~/ 3) + 1; // Convert month to quarter
+    final quarter = ((month - 1) ~/ 3) + 1;
 
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +20,8 @@ class TranscriptScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<String>(
-          future: TranscriptApi().getTranscript(ticker, year, quarter.toString()),
+          future:
+              TranscriptApi().getTranscript(ticker, year, quarter.toString()),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -40,4 +39,3 @@ class TranscriptScreen extends StatelessWidget {
     );
   }
 }
-
